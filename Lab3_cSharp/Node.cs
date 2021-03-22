@@ -9,9 +9,10 @@ namespace Lab3_cSharp
     public class Node
     {
         public int X { get; set; }
-        public int Y { get; set;  }
+        public int Y { get; set; }
         public bool ifBorder { get; set; }
         public Node Parent { get; set; }
+        public int Number { get; set; }
 
         public Node(int x, int y, char element)
         {
