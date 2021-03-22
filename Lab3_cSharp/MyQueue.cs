@@ -10,7 +10,7 @@ namespace Lab3_cSharp
     {
         private T[] _array;
         private int size;
-        private const int defaultCapacity = 10;
+        private const int defaultCapacity = 15;
         private int capacity;
         private int head;
         private int tail;
