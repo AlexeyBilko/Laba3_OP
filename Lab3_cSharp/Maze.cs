@@ -12,10 +12,11 @@ namespace Lab3_cSharp
         Node[][] grids;
         public Node start;
         public Node end;
+        List<string> lines;
 
         public Maze(string path, Point startElement, Point endElement)
         {
-            List<string> lines = File.ReadAllLines(path).ToList();
+            lines = File.ReadAllLines(path).ToList();
 
             grids = new Node[lines.Count][];
 
@@ -36,12 +37,12 @@ namespace Lab3_cSharp
         {
             List<string> list = new List<string>(grids.Length);
 
-            for (int i = 0; i < grids.Length; i++)
+            for (int i = 0; i < lines.Count; i++)
             {
                 list[i] = "";
-                for (int j = 0; j < grids[0].Length; j++)
+                for (int j = 0; j < lines[0].Length; j++)
                 {
-                    list[i] += grids[i][j];
+                    list[i] += lines[i][j];
                 }
             }
 
