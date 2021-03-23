@@ -19,6 +19,8 @@ namespace Lab3_cSharp
 
         public void Go()
         {
+
+            Info();
             int cost = 0;
             maze.grids[maze.start.X][maze.start.Y].Number = 99;
             maze.grids[maze.start.X][maze.start.Y].Mark = true;
@@ -165,7 +167,6 @@ namespace Lab3_cSharp
                     {
                         break;
                     }
-
                 }
                 while (maze.grids[x][y] != maze.grids[maze.start.X][maze.start.Y]);
 
@@ -177,8 +178,19 @@ namespace Lab3_cSharp
                     Console.WriteLine($"X - {n.X.ToString()} Y - {n.Y.ToString()} N - {n.Number}");
                     Way.Add(n);
                 }
+              
+
             }
             else Console.WriteLine("No way");
+
+
+        }
+
+        private void Info()
+        {
+            Console.WriteLine("Info: ");
+            Console.WriteLine($"start X = {maze.start.X} Y = {maze.start.Y}");
+            Console.WriteLine($"end Y = {maze.end.X} Y = {maze.end.Y}");
         }
     }
 }

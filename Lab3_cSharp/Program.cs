@@ -16,6 +16,7 @@ namespace Lab3_cSharp
             dejkstra.Go();
             if(maze.FindWay(dejkstra.Way))
                 maze.GetResult("outputfile.txt");
+            
         }
     }
 }
