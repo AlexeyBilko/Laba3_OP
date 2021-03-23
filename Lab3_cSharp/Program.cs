@@ -11,7 +11,7 @@ namespace Lab3_cSharp
         static void Main(string[] args)
         {
             string path = "inputfile.txt";
-            Maze maze = new Maze(path, new Point(1,1), new Point(3,3));
+            Maze maze = new Maze(path, new Point(1,1), new Point(3, 3));
             Dejkstra dejkstra = new Dejkstra(maze);
             dejkstra.Go();
             if(maze.FindWay(dejkstra.Way))

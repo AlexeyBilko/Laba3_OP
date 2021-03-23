@@ -19,120 +19,15 @@ namespace Lab3_cSharp
 
         public void Go()
         {
-
             Info();
-            int cost = 0;
-            maze.grids[maze.start.X][maze.start.Y].Number = 99;
-            maze.grids[maze.start.X][maze.start.Y].Mark = true;
+            PaintMatrix();
+            ShowMatrix();
+            ShowTrueMatrix();
+            MatrixQue();
+        }
 
-            bool STOP = false;
-            for (int i = 0; i < maze.grids.Length; i++)
-            {
-                if (STOP != true)
-                {
-                    for (int j = 0; j < maze.grids.Length; j++)
-                    {
-                        if (maze.grids[maze.end.X][maze.end.Y].Mark == true)
-                        {
-                            maze.grids[maze.end.X][maze.end.Y].Number = cost;
-                            STOP = true;
-                            break;
-                        }
-                        else
-                        {
-                            if (maze.grids[i][j].Mark == true)
-                            {
-                                bool isCost = false;
-                                if (i + 1 < maze.grids.Length && maze.grids[i + 1][j].Mark == false && maze.grids[i + 1][j].ifBorder == false)
-                                {
-                                    cost = cost + 1;
-                                    isCost = true;
-                                    maze.grids[i + 1][j].Number = cost;
-                                    maze.grids[i + 1][j].Mark = true;
-                                }
-                                if (i-1 < maze.grids.Length && i -1 >= 0 && maze.grids[i - 1][j].Mark == false && maze.grids[i - 1][j].ifBorder == false)
-                                {
-                                    if (isCost == true)
-                                    {
-                                        maze.grids[i - 1][j].Number = cost;
-                                        maze.grids[i - 1][j].Mark = true;
-                                    }
-                                    else
-                                    {
-                                        cost = cost + 1;
-                                        maze.grids[i - 1][j].Number = cost;
-                                        maze.grids[i - 1][j].Mark = true;
-                                    }
-                                }
-                                if (j + 1 < maze.grids.Length && maze.grids[i][j+1].Mark == false && maze.grids[i][j+1].ifBorder == false)
-                                {
-                                    if (isCost == true)
-                                    {
-                                        maze.grids[i][j + 1].Number = cost;
-                                        maze.grids[i][j + 1].Mark = true;
-                                    }
-                                    else
-                                    {
-                                        cost = cost + 1;
-                                        maze.grids[i][j + 1].Number = cost;
-                                        maze.grids[i][j + 1].Mark = true;
-                                    }
-                                }
-                                if (j - 1 < maze.grids.Length && j - 1 >= 0 && maze.grids[i][j - 1].Mark == false && maze.grids[i][j - 1].ifBorder == false)
-                                {
-                                    if (isCost == true)
-                                    {
-                                        maze.grids[i][j - 1].Number = cost;
-                                        maze.grids[i][j - 1].Mark = true;
-                                    }
-                                    else
-                                    {
-                                        cost = cost + 1;
-                                        maze.grids[i][j - 1].Number = cost;
-                                        maze.grids[i][j - 1].Mark = true;
-                                    }
-                                }
-                            }
-
-                        }
-
-                    }
- 
-                }
-                else break;
-            }
-            for (int i = 0; i < maze.grids.Length; i++)
-            {
-                for (int j = 0; j < maze.grids.Length; j++)
-                {
-                    if(maze.grids[i][j].ifBorder == false)
-                    {
-                        if (maze.grids[i][j] == maze.start)
-                            Console.Write("S");
-                        else if (maze.grids[i][j] == maze.end)
-                            Console.Write("F");
-                        else
-                            Console.Write(" ");
-                    }
-                    
-                    else Console.Write("#");
-                }
-                Console.WriteLine();
-            }
-
-
-            for (int i = 0; i < maze.grids.Length; i++)
-            {
-                for (int j = 0; j < maze.grids.Length; j++)
-                {
-                    if (maze.grids[i][j] == maze.end)
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(maze.grids[i][j].Number + "\t");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                Console.WriteLine();
-            }
-
+        private void MatrixQue()
+        {
             if (maze.grids[maze.end.X][maze.end.Y].Mark == true)
             {
                 queue = new MyQueue<Node>();
@@ -178,19 +73,136 @@ namespace Lab3_cSharp
                     Console.WriteLine($"X - {n.X.ToString()} Y - {n.Y.ToString()} N - {n.Number}");
                     Way.Add(n);
                 }
-              
-
             }
             else Console.WriteLine("No way");
+        }
 
+        private void ShowTrueMatrix()
+        {
+            for (int i = 0; i < maze.grids.Length; i++)
+            {
+                for (int j = 0; j < maze.grids.Length; j++)
+                {
+                    if (maze.grids[i][j] == maze.end)
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(maze.grids[i][j].Number + "\t");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.WriteLine();
+            }
+        }
 
+        private void ShowMatrix()
+        {
+            for (int i = 0; i < maze.grids.Length; i++)
+            {
+                for (int j = 0; j < maze.grids.Length; j++)
+                {
+                    if (maze.grids[i][j].ifBorder == false)
+                    {
+                        if (maze.grids[i][j] == maze.start)
+                            Console.Write("S");
+                        else if (maze.grids[i][j] == maze.end)
+                            Console.Write("F");
+                        else
+                            Console.Write(" ");
+                    }
+
+                    else Console.Write("#");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private void PaintMatrix()
+        {
+            int cost = 0;
+            maze.grids[maze.start.X][maze.start.Y].Number = 99;
+            maze.grids[maze.start.X][maze.start.Y].Mark = true;
+
+            bool STOP = false;
+            for (int i = 0; i < maze.grids.Length; i++)
+            {
+                if (STOP != true)
+                {
+                    for (int j = 0; j < maze.grids.Length; j++)
+                    {
+                        if (maze.grids[maze.end.X][maze.end.Y].Mark == true)
+                        {
+                            maze.grids[maze.end.X][maze.end.Y].Number = cost;
+                            STOP = true;
+                            break;
+                        }
+                        else
+                        {
+                            if (maze.grids[i][j].Mark == true)
+                            {
+                                bool isCost = false;
+                                if (i + 1 < maze.grids.Length && maze.grids[i + 1][j].Mark == false && maze.grids[i + 1][j].ifBorder == false)
+                                {
+                                    cost = cost + 1;
+                                    isCost = true;
+                                    maze.grids[i + 1][j].Number = cost;
+                                    maze.grids[i + 1][j].Mark = true;
+                                }
+                                if (i - 1 < maze.grids.Length && i - 1 >= 0 && maze.grids[i - 1][j].Mark == false && maze.grids[i - 1][j].ifBorder == false)
+                                {
+                                    if (isCost == true)
+                                    {
+                                        maze.grids[i - 1][j].Number = cost;
+                                        maze.grids[i - 1][j].Mark = true;
+                                    }
+                                    else
+                                    {
+                                        cost = cost + 1;
+                                        maze.grids[i - 1][j].Number = cost;
+                                        maze.grids[i - 1][j].Mark = true;
+                                    }
+                                }
+                                if (j + 1 < maze.grids.Length && maze.grids[i][j + 1].Mark == false && maze.grids[i][j + 1].ifBorder == false)
+                                {
+                                    if (isCost == true)
+                                    {
+                                        maze.grids[i][j + 1].Number = cost;
+                                        maze.grids[i][j + 1].Mark = true;
+                                    }
+                                    else
+                                    {
+                                        cost = cost + 1;
+                                        maze.grids[i][j + 1].Number = cost;
+                                        maze.grids[i][j + 1].Mark = true;
+                                    }
+                                }
+                                if (j - 1 < maze.grids.Length && j - 1 >= 0 && maze.grids[i][j - 1].Mark == false && maze.grids[i][j - 1].ifBorder == false)
+                                {
+                                    if (isCost == true)
+                                    {
+                                        maze.grids[i][j - 1].Number = cost;
+                                        maze.grids[i][j - 1].Mark = true;
+                                    }
+                                    else
+                                    {
+                                        cost = cost + 1;
+                                        maze.grids[i][j - 1].Number = cost;
+                                        maze.grids[i][j - 1].Mark = true;
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                else break;
+            }
         }
 
         private void Info()
         {
             Console.WriteLine("Info: ");
             Console.WriteLine($"start X = {maze.start.X} Y = {maze.start.Y}");
-            Console.WriteLine($"end Y = {maze.end.X} Y = {maze.end.Y}");
+            Console.WriteLine($"end X = {maze.end.X} Y = {maze.end.Y}");
         }
     }
 }
