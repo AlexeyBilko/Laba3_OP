@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dejkstra.cs" />
     <Compile Include="Maze.cs" />
     <Compile Include="MyQueue.cs" />
     <Compile Include="Node.cs" />

@@ -60,5 +60,6 @@ namespace Lab3_cSharp
                 return this.size;
             }
         }
+
     }
 }

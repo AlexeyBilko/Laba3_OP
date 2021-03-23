@@ -9,10 +9,10 @@ namespace Lab3_cSharp
 {
     public class Maze
     {
-        Node[][] grids;
+        public Node[][] grids;
         public Node start;
         public Node end;
-        List<string> lines;
+        public List<string> lines { get; set; }
 
         public Maze(string path, Point startElement, Point endElement)
         {
@@ -35,18 +35,39 @@ namespace Lab3_cSharp
 
         public void GetResult(string path)
         {
-            List<string> list = new List<string>(grids.Length);
+            List<string> list = new List<string>();// grids.Length);
+
+            File.WriteAllText(path, "");
 
             for (int i = 0; i < lines.Count; i++)
             {
-                list[i] = "";
-                for (int j = 0; j < lines[0].Length; j++)
+                list.Add("");
+                for (int j = 0; j < lines.Count; j++)
                 {
                     list[i] += lines[i][j];
                 }
+                Console.WriteLine(list[i]);
             }
 
             File.AppendAllLines(path, list);
+        }
+
+        public bool FindWay(List<Node> way)
+        {
+            try
+            {
+                foreach (var currentNode in way)
+                {
+                    StringBuilder str = new StringBuilder(lines[currentNode.Y]);
+                    str[currentNode.X] = '*';
+                    lines[currentNode.X] = str.ToString();
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

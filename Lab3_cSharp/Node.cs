@@ -13,6 +13,8 @@ namespace Lab3_cSharp
         public bool ifBorder { get; set; }
         public Node Parent { get; set; }
         public int Number { get; set; }
+        public bool Mark { get; set; }
+        public bool isWay {get;set;}
 
         public Node(int x, int y, char element)
         {
