@@ -11,7 +11,6 @@ namespace Lab3_cSharp
         public int X { get; set; }
         public int Y { get; set; }
         public bool ifBorder { get; set; }
-        public Node Parent { get; set; }
         public int Number { get; set; }
         public bool Mark { get; set; }
         public bool isWay {get;set;}

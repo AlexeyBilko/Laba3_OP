@@ -9,7 +9,7 @@ namespace Lab3_cSharp
 {
     public class Maze
     {
-        public Node[][] grids;
+        public Node[][] nodes;
         public Node start;
         public Node end;
         public List<string> lines { get; set; }
@@ -18,24 +18,24 @@ namespace Lab3_cSharp
         {
             lines = File.ReadAllLines(path).ToList();
 
-            grids = new Node[lines.Count][];
+            nodes = new Node[lines.Count][];
 
             for (int i = 0; i < lines.Count; i++)
             {
-                grids[i] = new Node[lines[i].Length];
+                nodes[i] = new Node[lines[i].Length];
                 for (int j = 0; j < lines[i].Length; j++)
                 {
-                    grids[i][j] = new Node(j, i, lines[i][j]);
+                    nodes[i][j] = new Node(j, i, lines[i][j]);
                 }
             }
 
-            start = grids[startElement.X][startElement.Y];
-            end = grids[endElement.X][endElement.Y];
+            start = nodes[startElement.X][startElement.Y];
+            end = nodes[endElement.X][endElement.Y];
         }
 
         public void GetResult(string path)
         {
-            List<string> list = new List<string>();// grids.Length);
+            List<string> list = new List<string>();// nodes.Length);
 
             File.WriteAllText(path, "");
 
