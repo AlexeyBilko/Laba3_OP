@@ -12,11 +12,9 @@ namespace Lab3_cSharp
         {
             string path = "inputfile.txt";
             Maze maze = new Maze(path, new Point(1,1), new Point(6, 1));
-            Dejkstra dejkstra = new Dejkstra(maze);
+            Dijkstra dejkstra = new Dijkstra(maze);
             dejkstra.Go();
-            //if(maze.FindWay(dejkstra.Way))
-                maze.GetResult("outputfile.txt");
-            
+            maze.GetResult("outputfile.txt");
         }
     }
 }

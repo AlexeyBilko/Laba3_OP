@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab3_cSharp
 {
-    public class Dejkstra
+    public class Dijkstra
     {
         public Maze maze;
         public MyQueue<Node> queue;
         public List<Node> Way;
 
-        public Dejkstra(Maze _maze)
+        public Dijkstra(Maze _maze)
         {
             maze = _maze;
         }
