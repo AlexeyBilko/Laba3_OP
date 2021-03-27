@@ -29,8 +29,8 @@ namespace Lab3_cSharp
                 }
             }
 
-            start = nodes[startElement.X][startElement.Y];
-            end = nodes[endElement.X][endElement.Y];
+            start = nodes[startElement.Y][startElement.X];
+            end = nodes[endElement.Y][endElement.X];
         }
 
         public void GetResult(string path)
@@ -44,30 +44,14 @@ namespace Lab3_cSharp
                 list.Add("");
                 for (int j = 0; j < lines.Count; j++)
                 {
-                    list[i] += lines[i][j];
+                    if (nodes[i][j].Number > 0)
+                        list[i] += "\t" + nodes[i][j].Number;
+                    else
+                        list[i] += "\t" + lines[i][j];
                 }
-                Console.WriteLine(list[i]);
             }
 
             File.AppendAllLines(path, list);
-        }
-
-        public bool FindWay(List<Node> way)
-        {
-            try
-            {
-                foreach (var currentNode in way)
-                {
-                    StringBuilder str = new StringBuilder(lines[currentNode.Y]);
-                    str[currentNode.X] = '*';
-                    lines[currentNode.X] = str.ToString();
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
         }
     }
 }
